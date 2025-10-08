@@ -883,20 +883,19 @@ TweenGroup:Play()
 ___
 </details>
 
-<details><summary>⚠ TweenSequence</summary>
+<details><summary>TweenSequence</summary>
 
-:warning: This is experimental, and may cause poor performance if used too sparingly!
+**Description:** Exclusively allows the ability to tween ColorSequences and NumberSequences.
 
-**Description:** An experimental method to tween what was previously untweenable.
+**Setup 1:** `ShadLibrary.TweenSequence(Instance, allowPointSliding, TweenInfo){Properties}`
 
-**Setup 1:** `ShadLibrary.TweenSequence(Instance, TweenInfo){Properties}`
-
-**Setup 2:** `ShadLibrary.TweenSequence(Instance, Time, Style, Direction, Repeat, Reverses, Delay){Properties}`
+**Setup 2:** `ShadLibrary.TweenSequence(Instance, allowPointSliding, Time, Style, Direction, Repeat, Reverses, Delay){Properties}`
 
 **Returns:** A special tween-base made via metatables. Should be able to work just like a normal Tween with the same functions and variables. This includes a new function: **Tween:Destroy()** since this works in a specific way, if you want to clean up a bit, I recommend you use this when not needed anymore.
 | Variable | Type | Default | Description |
 | --- | --- | --- | --- |
-| Instances | Instance | REQUIRED | The Instances in which you wish to tween. |
+| Instance | Instance | REQUIRED | The Instance in which you wish to tween. |
+| allowPointSliding | boolean | REQUIRED | If true, will allow sequences that have the same number of keypoints to tween their times to match up, otherwise applies an overlapping fade effect. |
 | TweenInfo¹ | TweenInfo | Below Defaults | The TweenInfo you wish to use. |
 | Time² | number | 1 | How long it takes the tween to complete. |
 | Style | Enum / number / string | Linear | The EasingStyle of the tween. |
@@ -905,50 +904,39 @@ ___
 | Reverses | boolean | false | Determines if the tween will do the inverse after finishing. |
 | Delay | number | 0 | The amount of time that elapses before tween starts in seconds. |
 | | | | |
-| Properties | table | {} | The properties that are being changed by the tween. In this case, restricted. |
-
-## **What can be tweened currently**
-
-### ColorSequence
-
-If the start and end sequences have differing number keypoints, 2 new sequences will be created with some "ghost keypoints" in the middle to still generally reflect what the start and end should look like. Then, when tweening, each color's keypoint is lerped over each other to give a fading effect.
-
-If the number of keypoints remains the same and the start of the property name has a tilde (**~**), then it will attempt to also tween the time position of the keypoints between the start and end points, giving a sliding effect on top of the color changing effect.
-
-### NumberSequence
-
-Works largely similar to ColorSequence, but instead with colors it deals in numbers and envelopes. The tilde rule also applies here.
+| Properties | table | {} | The properties that are being changed by the tween. Restricted to NumberSequences and ColorSequences. |
 
 ### Usage Example
 
 ```lua
 ----Example 1
-local Beam = workspace.Part1.Beam
-local ChangeTo = ColorSequence.new{
- ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
- ColorSequenceKeypoint.new(0.25, Color3.fromRGB(255, 0, 0)),
- ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 0)),
- ColorSequenceKeypoint.new(0.75, Color3.fromRGB(0, 0, 255)),
- ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))}
+local beam = workspace.Part1.Beam
+local newSequence = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 0, 0)),
+	ColorSequenceKeypoint.new(0.25, Color3.fromRGB(255, 0, 0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 0)),
+	ColorSequenceKeypoint.new(0.75, Color3.fromRGB(0, 0, 255)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))
+}
 
-local Tween = ShadLibrary.TweenSequence(Beam, 1, "Linear", "InOut", 2, true, 0.5){Color = ChangeTo}
-Tween:Play()
---Should tween any beam's colors to look a bit rainbow-like, revert, and does this a couple of times.
+local colorTween = ShadLibrary.TweenSequence(beam, false, 1, "Linear", "InOut", 2, true, 0.5){Color = newSequence}
+colorTween:Play()
+--Will tween any beam's colors to look a bit rainbow-like, revert, and repeats this a couple of times.
 
 ----Example 2
-local ParticleEmitter = workspace.Part5.ParticleEmitter
-local ChangeTo = NumberSequence.new{
- NumberSequenceKeypoint.new(0, 1),
- NumberSequenceKeypoint.new(0.349, 3.39, 1.58),
- NumberSequenceKeypoint.new(1, 1)}
+--In this example, let's assume the particle emitter's default size NumberSequence also contains 3 KeyPoints
+local particleEmitter = workspace.Part5.ParticleEmitter
+local newSequence = NumberSequence.new{
+	NumberSequenceKeypoint.new(0, 1),
+	NumberSequenceKeypoint.new(0.349, 3.39, 1.58),
+	NumberSequenceKeypoint.new(1, 1)
+}
 
-local MyInfo = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 2, true, 0.5)
+local myTweenInfo = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 2, true, 0.5)
 
-local Tween = ShadLibrary.TweenSequence(ParticleEmitter, MyInfo){["~Size"] = ChangeTo}
-Tween:Play()
-Tween.Completed:Wait()
-print("Demo finished!")
---Should tween a particle emitter's size, sliding the values if the initial NumberSequence is also 3 keypoints.
+local sizeTween = ShadLibrary.TweenSequence(particleEmitter, myTweenInfo){Size = newSequence}
+sizeTween:Play()
+--Will tween the particle emitter's size, sliding the middle KeyPoint's time to match the new time
 ```
 
 ___
