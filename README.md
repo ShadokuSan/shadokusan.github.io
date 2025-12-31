@@ -48,6 +48,8 @@ This is a table that hosts multiple semi-commonly used formulas, put into functi
 | TimeConvert | TimeConvert(Seconds: number, TimeUnit: string<"Milliseconds", "Seconds", "Hours", "Days", "Weeks">) | Returns the conversion of seconds to another time unit. |
 | CFrameToOrientation | CFrameToOrientation(CF: CFrame) | Simply fetches the orientation of a CFrame. |
 | OrientationToCFrame | OrientationToCFrame(Orientation: Vector3) | Simply converts an orientation to usable CFrame angles. |
+| BezierCurve | BezierCurve(pointTable: {Vector3}, amountOfPoints: number) | Returns an array of positions used to form a bezier curve. |
+| PointOnBezier | PointOnBezier(pointTable: {Vector3}, alpha: number) | Returns a point on a bezier curve given the alpha. |
 
 #
 
