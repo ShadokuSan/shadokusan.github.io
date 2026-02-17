@@ -1432,3 +1432,257 @@ This list is specifically for the functions where changing the properties of an 
 | "...Name" | Value | BrickColor | Checks if the name of the **BrickColor** ends with your input. | {BrickColor = "...red"} |
 | {Value, Value... etc} | Value | Any | You can now set each property to equal a table of values. Basically: If property equals this, or this, or this… etc. | {Transparency = {0, 0.5, 1}} |
 </details>
+
+___
+
+<details><summary><h3>Latest Updates</h3></summary>
+
+<details><summary>July 20th, 2022</summary>
+
+* Renamed to better reflect what this is.
+* Minor adjustments that shouldn't impact much.
+
+</details>
+
+<details><summary>August 17th, 2022</summary>
+
+* Minor type-checking adjustments.
+* Minor changes to existing functions that loop through tables multiple times.
+* Added function **Fetch** which allows you to fetch multiple variables from instances or tables.
+
+</details>
+
+<details><summary>September 21st, 2022</summary>
+
+* Fixed a problem with **WaitForChildren** where it could return `nil` values, thus offsetting multiple values when using the asterisk special input.
+* **WaitForPath** will now return false values instead of `nil` to not offset values when using the asterisk special input.
+
+</details>
+
+<details><summary>September 23rd, 2022</summary>
+
+* Function **GetAttributes** now includes a variable that allows you to auto-create attributes if the requested ones cannot be found, or not. Previously inserting a table value would automatically do this, now that is toggleable.
+* A lot of type-checking adjustments.
+* **Change** and **Clone** now accept attributes as possible inputs.
+* Functions that have the **Same** special input can place more than one if they are enumerated.
+* **FindAllChildren** now has access to the asterisk input for pathing like **WaitForChildren**.
+* Removal of the **Time** function.
+* Minor bug fixes.
+* Minor adjustments to documentation to include previously missing information.
+
+</details>
+
+<details><summary>January 9th, 2023</summary>
+
+* Addition of the **Replace** function. This replaces an instance in place for either creating a new instance or cloning another one.
+* Addition of the **Formulas** variable. This is a table that holds a few semi-common formulas in function form.
+* Moved the documentation to an off-site source due to hitting the 50K text limit. Whoops.
+
+</details>
+
+<details><summary>June 19th, 2023</summary>
+
+* Removal of the function **Require** and the variable **Mods**.
+* Addition of the formula **TimeConvert**. This formula takes any number of seconds and converts that to another unit of time.
+* Addition of the function **TimeTable**. This function takes any number of seconds and returns a dictionary of all possible conversions from the formula **TimeConvert**.
+* Addition of the function **TimeFormat**. This function takes any number of seconds and converts that to a time format of your choosing.
+
+</details>
+
+<details><summary>June 26th, 2023</summary>
+
+Addition of the function **GetInstance**.  This function searches for an Instance or creates a new one if it doesn't yet exist.
+
+</details>
+
+<details><summary>July 1st, 2023</summary>
+
+Slight change of function **GetInstance**.  The 4th variable input acts differently and has three valid inputs.
+
+</details>
+
+<details><summary>July 3rd, 2023</summary>
+
+* Made significant alterations to all of the Tween-related functions. The use format is different than before.
+* Made a similar alteration to the Plugin_Widget function.
+* Minor type-checking adjustments to the module all-around.
+* Addition of the function **WeldTo**.  This function automatically welds (via WeldConstraints) a lot of parts to a singular part.
+
+</details>
+
+<details><summary>July 6th, 2023</summary>
+
+Primarily just some type-checking adjustments.
+
+</details>
+
+<details><summary>July 18th, 2023</summary>
+
+* Module's Warn and Error handlers should be a tad bit more clear.
+* Function **WeldTo** slight adjustment to second input variable; can now also be set to true.
+
+</details>
+
+<details><summary>July 30th, 2023</summary>
+
+Inclusion of 2 new formulas: **CFrameToOrientation** and **OrientationToCFrame**. I'd imagine that is pretty self-explanatory.
+
+</details>
+
+<details><summary>January 25th, 2024</summary>
+
+No major changes this time around. Made some of the variables inside of the module clear, and attempted to reformat the script in certain areas to reduce the amount of scrunch in there.
+
+</details>
+
+<details><summary>February 1st, 2024</summary>
+
+* Fixed a bug in any function that utilizes **change** where attributes would be automatically created in the absence of a requested property.
+* Changed **GetAttribute** to properly return `nil` whenever an attribute is missing instead of **false** which could be confused for a boolean attribute.
+
+</details>
+
+<details><summary>February 6th, 2024</summary>
+
+* Function **ChangeSame** has been deprecated.
+* Fixed the "Attribute" properties special input for any **Find** related function.
+* Added a new special input for any **Find** relation function: "HasTag"
+* Added 2 new special inputs for any function that changes an instance's properties: "AddTags" and "RemoveTags"
+
+</details>
+
+<details><summary>March 21st, 2024</summary>
+
+* Minor changes in how the function **WaitOn** handles connections.
+* Addition of the function **TweenLink** which allows you to play, pause, or cancel multiple tweens at the same time. Limited functionality.
+* Removed the unnecessary meta-table from **TweenSequence**.
+* Swapped the function **Tweens** for the more distinct **TweenGroup**.
+* **TweenGroup** no longer automatically plays the tweens upon creation. May now be called to play, pause, or cancel manually.
+* Tweaks to type checking for multiple functions.
+
+</details>
+
+<details><summary>March 26th, 2024</summary>
+
+Minor type-checking adjustments.
+
+</details>
+
+<details><summary>May 9th, 2024</summary>
+
+* Minor type-checking adjustments.
+* Reformatted the script.
+* Adjusted some warn/error messages.
+* Swapped out some pcalls in favor of xpcalls.
+
+</details>
+
+<details><summary>June 4th, 2024</summary>
+
+* Removal of the **FrameSpeed** argument from functions: **Find**, **FindChange**, **FindDestroy**
+* Special number input "--" changed to just "-"
+* Deprecation of function **IsPartOf** since Roblox has similar functions natively now
+* Deprecation of function **Call**
+* Multitude of changes to make module hopefully more readable
+
+</details>
+
+<details><summary>August 21st, 2024</summary>
+
+Fixed an error in all find-related functions.
+
+</details>
+
+<details><summary>August 22nd, 2024</summary>
+
+Fixed an error in all change-related functions.
+
+</details>
+
+<details><summary>September 7th, 2024 ⚠️ Major Overhaul ⚠️</summary>
+
+Changes to **Find** function:
+* Functions **FindChange** and **FindDestroy** have been merged into this one
+* Change in arguments to accommodate for the merged functions
+* First argument can now be a string so you can look via tags
+* Deprecation of the "**HasTag**" and "**IsA**" special inputs as an alternative now exists
+* The *properties* argument has a new structure that allows for the use of functions, attributes, and custom functions that are not part of the instance you're looking for
+
+Changes to **Change** function:
+* Deprecation of the special inputs: Same, AddTags, RemoveTags
+* **SetAttributes** function has been merged into this one
+* The *properties* argument has a new structure similar to that of the **Find** function
+* Vector3's can now be multiplied/divided like normal numbers can, via other numbers or another Vector3
+
+Other changes:
+* Deprecation of the functions **Fetch**, **GetPartOf**, **Tabs**, and **MassDisconnect**
+* **MassDisconnect** has been merged into **Destroy**
+* **Destroy** can now sever connections and cancel threads
+* Change to arguments in **WaitOn**
+* Some extra warn/error messages to make things more clear when something goes wrong
+* Reduced redundant snippets of code
+* Bunch of typechecking adjustments
+
+</details>
+
+<details><summary>September 8th, 2024</summary>
+
+Fixed a bug in the **Replace** function.
+
+</details>
+
+<details><summary>October 19th, 2024</summary>
+
+* Minor error fixes in a couple of functions
+* Fixed typechecking for TweenSequence
+
+</details>
+
+<details><summary>December 29th, 2024</summary>
+
+Fixed an error with the **Find** function when tasked to "Destroy" not working properly
+
+</details>
+
+<details><summary>January 2nd, 2025</summary>
+
+* Inclusion of an exported character type; supports both R6 and R15 rigs.
+* Exported type is based off of the block rig builder via the Studio plugin.
+
+</details>
+
+<details><summary>July 24th, 2025</summary>
+
+* Changed function "WaitOn" input argument
+* Function "WaitOn" will warn if not using the appropriate input argument
+
+</details>
+
+<details><summary>October 7th, 2025</summary>
+
+Fixed minor error in the **TweenLink** function that prevented the tween from being played again after stopping.
+
+</details>
+
+<details><summary>October 8th, 2025</summary>
+
+* Code presentation should be more consistent with the Roblox Lua Style Guide
+* **TweenSequence** should now give more accurate results
+* **TweenSequence** has a new argument: allowPointSliding
+* 2 now formulas added: LerpColorSequence & LerpNumberSequence
+
+</details>
+
+<details><summary>December 27th, 2025</summary>
+
+Replaced deprecated **CreateDockWidgetPluginGui** with **CreateDockWidgetPluginGuiAsync**
+
+</details>
+
+<details><summary>December 31st, 2025</summary>
+
+Added formulas **BezierCurve** and **PointOnBezier**
+
+</details>
+
+</details>
