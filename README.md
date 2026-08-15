@@ -422,7 +422,7 @@ ___
 
 **Aliases:** Search
 
-**Description:** Advanced Instance searcher.
+**Description:** Advanced Instance searcher/counter.
 
 **Setup 1:** `ShadLibrary.Find(Instance, CheckDescendants, MaxAmount, FollowFunction, IgnoreList){SearchFields}`
 
@@ -430,7 +430,13 @@ ___
 
 **Setup 3:** `ShadLibrary.Find(..., FollowFunction = "Change", ...){SearchFields}{ChangeFields}`
 
-**Returns:** The instance(s) found or none if none were found, or none if FollowFunction was set to "Destroy"
+**Returns:** Depends on how the FollowFunction argument is set:
+| FollowFunction | Types | Description |
+| --- | --- | --- |
+| unset / false | Instance? / {Instance}? | Gives either 1 instance, an array of instances or none at all. |
+| "Destroy" | nil | Returns nothing at all. |
+| "Change" | Instance? / {Instance}? | Gives either 1 instance, an array of instances or none at all. |
+| "Count" | number | Returns the amount of matching instances. |
 
 | Variable | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -438,7 +444,7 @@ ___
 | CheckDescendants¹ | boolean | false | If it will search all descendants like :GetAllDescendants() |
 | Tag² | string | REQUIRED | Looks through all instances with this tag. |
 | MaxAmount | number / false | false | The number of instances you want to be returned. Set to false to have an infinite amount. |
-| FollowFunction | string / false | false | Determines if there is a follow-up function after finding the desired instance. Can be false for none, "Change" to allow you to change the instance(s) found, or "Destroy" to destroy all found instances. |
+| FollowFunction | string / false | false | Determines if there is a follow-up function after finding the desired instance. |
 | IgnoreList | table | {} |  An array of Instances that you want ignored, including its children. |
 | | | | |
 | [SearchFields](#searchfields-setup) | table | REQUIRED | A dictionary of the properties/attributes of the instance(s) you’re looking for. |
@@ -1682,6 +1688,14 @@ Replaced deprecated **CreateDockWidgetPluginGui** with **CreateDockWidgetPluginG
 <details><summary>December 31st, 2025</summary>
 
 Added formulas **BezierCurve** and **PointOnBezier**
+
+</details>
+
+<details><summary>August 15th, 2026</summary>
+
+* **TweenLink**/**TweenGroup** will no longer stop other tweens in the same group if one finishes first.
+* Minor logic adjustments.
+* **Find** argument FollowFunction can now be set to "Count".
 
 </details>
 
